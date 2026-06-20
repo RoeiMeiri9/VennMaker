@@ -45,6 +45,24 @@ const regions3 = [
   },
 ];
 
+const regions2 = [
+  {
+    id: "A_only",
+    mask: 1,
+    draw: `<mask id="mA2"><rect width="400" height="220" fill="#fff"/> <circle cx="240" cy="100" r="80" fill="#000"/></mask><g mask="url(#mA2)">${circA2}</g>`,
+  },
+  {
+    id: "B_only",
+    mask: 2,
+    draw: `<mask id="mB2"><rect width="400" height="220" fill="#fff"/> <circle cx="160" cy="100" r="80" fill="#000"/></mask><g mask="url(#mB2)">${circB2}</g>`,
+  },
+  {
+    id: "A_n_B",
+    mask: 3,
+    draw: `<clipPath id="cAB2">${circA2}</clipPath><g clip-path="url(#cAB2)">${circB2}</g>`,
+  },
+];
+
 function setCircles(num) {
   mode = num;
   document.getElementById("btn2").classList.toggle("active", num === 2);
@@ -69,10 +87,13 @@ function parseExpression(expr, maskValue) {
   let b = maskValue & 2 ? "true" : "false";
   let c = maskValue & 4 ? "true" : "false";
 
-  clean = clean.replace(/A/g, a).replace(/B/g, b).replace(/C/g, c);
+  clean = clean
+    .replace(/A/g, `(${a})`)
+    .replace(/B/g, `(${b})`)
+    .replace(/C/g, `(${c})`);
 
   try {
-    return eval(clean);
+    return !!eval(clean);
   } catch (e) {
     throw new Error("שגיאה בניסוח הביטוי.");
   }
@@ -96,27 +117,15 @@ function renderDiagram() {
 
   svgHtml += `<g fill="#34c759" fill-opacity="1" opacity="0.55">`;
   try {
-    if (mode === 3) {
-      regions3.forEach((reg) => {
-        if (parseExpression(exprInput, reg.mask)) {
-          svgHtml += reg.draw;
-        }
-      });
-    } else {
-      if (parseExpression(exprInput, 1))
-        svgHtml += `<g clip-path="url(#clipA2_inv)"><circle cx="160" cy="100" r="80" /></g>`;
-      if (parseExpression(exprInput, 2))
-        svgHtml += `<g clip-path="url(#clipB2_inv)"><circle cx="240" cy="100" r="80" /></g>`;
-      if (parseExpression(exprInput, 3))
-        svgHtml += `<g clip-path="url(#clipA2)"><circle cx="240" cy="100" r="80" /></g>`;
+    const currentRegions = mode === 3 ? regions3 : regions2;
 
-      svgHtml = svgHtml.replace(
-        "<defs>",
-        `<defs><clipPath id="clipA2">${circA2}</clipPath><clipPath id="clipB2">${circB2}</clipPath>`,
-      );
-    }
+    currentRegions.forEach((reg) => {
+      if (parseExpression(exprInput, reg.mask)) {
+        svgHtml += reg.draw;
+      }
+    });
   } catch (err) {
-    errorDiv.innerText = "שגיאה בביטוי המתמטי. ודא שסגרת סוגריים.";
+    errorDiv.innerText = "שגיאה בביטוי המתמטי.";
     return;
   }
   svgHtml += `</g>`;
