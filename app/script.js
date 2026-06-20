@@ -121,19 +121,36 @@ function renderDiagram() {
   }
   svgHtml += `</g>`;
 
-  if (mode === 3) {
-    svgHtml += `<g class="outline">${circA3}${circB3}${circC3}</g>`;
-    svgHtml += `<text x="70" y="100" font-size="20" font-weight="bold">A</text>`;
-    svgHtml += `<text x="320" y="100" font-size="20" font-weight="bold">B</text>`;
-    svgHtml += `<text x="200" y="330" font-size="20" font-weight="bold" text-anchor="middle">C</text>`;
-  } else {
-    svgHtml += `<g class="outline">${circA2}${circB2}</g>`;
-    svgHtml += `<text x="90" y="105" font-size="20" font-weight="bold" text-anchor="middle">A</text>`;
-    svgHtml += `<text x="310" y="105" font-size="20" font-weight="bold" text-anchor="middle">B</text>`;
-  }
+  svgHtml = placeText(svgHtml, mode, circA3, circB3, circC3, circA2, circB2);
 
   svgHtml += `</svg>`;
   document.getElementById("svg-container").innerHTML = svgHtml;
+}
+
+function placeText(
+  svgHtml,
+  mode,
+  circA3,
+  circB3,
+  circC3,
+  circA2,
+  circB2,
+  multiply = 1,
+) {
+  if (mode === 3) {
+    svgHtml += `<g class="outline">${circA3}${circB3}${circC3}</g>`;
+
+    svgHtml += `<text x="${45 * multiply}" y="${110 * multiply}" font-size="${22 * multiply}" font-weight="bold" font-family="system-ui" text-anchor="middle">A</text>`;
+    svgHtml += `<text x="${355 * multiply}" y="${110 * multiply}" font-size="${22 * multiply}" font-weight="bold" font-family="system-ui" text-anchor="middle">B</text>`;
+    svgHtml += `<text x="${200 * multiply}" y="${340 * multiply}" font-size="${22 * multiply}" font-weight="bold" font-family="system-ui" text-anchor="middle">C</text>`;
+  } else {
+    svgHtml += `<g class="outline">${circA2}${circB2}</g>`;
+
+    svgHtml += `<text x="${60 * multiply}" y="${105 * multiply}" font-size="${22 * multiply}" font-weight="bold" font-family="system-ui" text-anchor="middle">A</text>`;
+    svgHtml += `<text x="${340 * multiply}" y="${105 * multiply}" font-size="${22 * multiply}" font-weight="bold" font-family="system-ui" text-anchor="middle">B</text>`;
+  }
+
+  return svgHtml;
 }
 
 renderDiagram();
@@ -234,16 +251,17 @@ function copySVGAsImage() {
   }
   svgHtml += `</g>`;
 
-  if (mode === 3) {
-    svgHtml += `<g class="outline">${circA3_large}${circB3_large}${circC3_large}</g>`;
-    svgHtml += `<text x="180" y="440" font-size="88" font-weight="bold" font-family="system-ui">A</text>`;
-    svgHtml += `<text x="1360" y="440" font-size="88" font-weight="bold" font-family="system-ui">B</text>`;
-    svgHtml += `<text x="800" y="1360" font-size="88" font-weight="bold" font-family="system-ui" text-anchor="middle">C</text>`;
-  } else {
-    svgHtml += `<g class="outline">${circA2_large}${circB2_large}</g>`;
-    svgHtml += `<text x="260" y="420" font-size="88" font-weight="bold" font-family="system-ui" text-anchor="middle">A</text>`;
-    svgHtml += `<text x="1340" y="420" font-size="88" font-weight="bold" font-family="system-ui" text-anchor="middle">B</text>`;
-  }
+  svgHtml = placeText(
+    svgHtml,
+    mode,
+    circA3_large,
+    circB3_large,
+    circC3_large,
+    circA2_large,
+    circB2_large,
+    4,
+  );
+
   svgHtml += `</svg>`;
 
   const svgBlob = new Blob([svgHtml], { type: "image/svg+xml;charset=utf-8" });
