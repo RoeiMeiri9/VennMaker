@@ -3,25 +3,25 @@
 }
 
 body {
-  font-family:
-    system-ui,
-    -apple-system,
-    sans-serif;
-  background-color: #f4f4f7;
-  color: #333;
   margin: 0;
   padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #f4f4f7;
+  color: #333;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
 }
 .container {
-  background: white;
-  padding: 25px;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  max-width: 600px;
   width: 100%;
+  max-width: 600px;
+  padding: 25px;
+  background: white;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
   text-align: center;
 }
 h1 {
@@ -29,15 +29,15 @@ h1 {
   color: #1a1a1a;
 }
 p.subtitle {
-  color: #666;
   margin-top: 0;
+  color: #666;
   font-size: 0.9rem;
 }
 .controls {
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-top: 20px;
 }
 .row {
   display: flex;
@@ -45,13 +45,13 @@ p.subtitle {
   justify-content: center;
 }
 input[type="text"] {
-  flex: 1;
   padding: 12px;
+  direction: ltr;
+  flex: 1;
   border: 2px solid #ddd;
   border-radius: 8px;
   font-size: 1.1rem;
   text-align: left;
-  direction: ltr;
 }
 input[type="text"]:focus {
   border-color: #007aff;
@@ -60,12 +60,12 @@ input[type="text"]:focus {
 button {
   padding: 12px 24px;
   background-color: #007aff;
-  color: white;
   border: none;
   border-radius: 8px;
+  color: white;
   font-size: 1rem;
-  cursor: pointer;
   font-weight: bold;
+  cursor: pointer;
 }
 button:hover {
   background-color: #0056b3;
@@ -87,23 +87,24 @@ button:hover {
 #svg-container {
   margin-top: 30px;
   margin-bottom: 10px;
-  background: #fff;
   padding: 10px;
-  border-radius: 12px;
-  border: 1px dashed #ccc;
   display: flex;
   justify-content: center;
+  background: #fff;
+  border: 1px dashed #ccc;
+  border-radius: 12px;
 }
 .error {
+  min-height: 20px;
+  margin-top: 10px;
   color: #ff3b30;
   font-weight: bold;
-  margin-top: 10px;
-  min-height: 20px;
 }
 
 .legend {
   margin-top: 24px;
   padding: 16px;
+  direction: rtl;
   background-color: #f8f9fa;
   border: 1px solid #e5e5ea;
   border-radius: 12px;
@@ -112,40 +113,39 @@ button:hover {
     -apple-system,
     sans-serif;
   text-align: right;
-  direction: rtl;
 }
 
 .legend-title {
-  font-weight: 700;
-  color: #1a1a1a;
   margin-bottom: 12px;
+  color: #1a1a1a;
   font-size: 0.95rem;
+  font-weight: 700;
 }
 
 .legend-grid {
-  display: grid;
-  gap: 12px;
   margin-bottom: 14px;
   padding-bottom: 12px;
+  display: grid;
+  gap: 12px;
   border-bottom: 1px dashed #e5e5ea;
 }
 
 .legend-item {
-  font-size: 0.9rem;
-  color: #48484a;
   display: flex;
-  align-items: center;
   gap: 6px;
+  align-items: center;
+  color: #48484a;
+  font-size: 0.9rem;
 }
 
 .legend .key {
-  background: #e5e5ea;
-  color: #1c1c1e;
   padding: 2px 8px;
+  background: #e5e5ea;
   border-radius: 6px;
+  color: #1c1c1e;
+  font-size: 0.95rem;
   font-family: monospace;
   font-weight: bold;
-  font-size: 0.95rem;
 }
 
 .legend .math-sym {
@@ -154,71 +154,71 @@ button:hover {
 }
 
 .legend-examples {
-  font-size: 0.85rem;
-  color: #636366;
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   gap: 8px;
+  align-items: center;
+  color: #636366;
+  font-size: 0.85rem;
 }
 
 .legend .ex {
+  padding: 3px 8px;
+  direction: ltr;
   background: #ffffff;
   border: 1px solid #d1d1d6;
-  padding: 3px 8px;
   border-radius: 6px;
   font-family: monospace;
-  direction: ltr;
 }
 
 #venn-overlay {
-  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  position: fixed;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  background-color: rgba(0, 0, 0, 0.4);
   font-family:
     system-ui,
     -apple-system,
     sans-serif;
+  transition: opacity 0.3s ease;
+  z-index: 9999;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .venn-modal {
-  background: white;
-  padding: 24px;
-  border-radius: 20px;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
-  max-width: 90%;
   width: 450px;
-  text-align: center;
-  position: relative;
+  max-width: 90%;
+  padding: 24px;
   transform: scale(0.9);
+  position: relative;
+  background: white;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  text-align: center;
   transition: transform 0.3s ease;
 }
 
 .venn-modal-close {
-  position: absolute;
   top: 16px;
   right: 16px;
-  background: #f0f0f5;
-  border: none;
   width: 40px;
   height: 40px;
   padding: 0;
+  position: absolute;
+  background: #f0f0f5;
+  border: none;
   border-radius: 100px;
+  color: #666;
   font-size: 14px;
   cursor: pointer;
-  color: #666;
 }
 .venn-modal-close:hover {
   background-color: #d0d0d7;
@@ -238,10 +238,10 @@ button:hover {
 }
 
 .venn-modal-img {
-  max-width: 100%;
   height: auto;
-  border-radius: 12px;
-  border: 1px solid #e5e5ea;
+  max-width: 100%;
   background: #fff;
+  border: 1px solid #e5e5ea;
+  border-radius: 12px;
   -webkit-touch-callout: default;
 }
