@@ -30,7 +30,7 @@ To run the generator locally on your machine (and access it from your iPad/table
 ### 1. Clone the repository
 
 ```bash
-git clone [https://github.com/YOUR_USERNAME/VennMaker.git](https://github.com/YOUR_USERNAME/VennMaker.git)
+git clone [https://github.com/RoeiMeiri9/VennMaker.git](https://github.com/RoeiMeiri9/VennMaker.git)
 cd VennMaker
 ```
 
