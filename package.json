@@ -4,10 +4,15 @@
   "description": "",
   "main": "site/script.js",
   "scripts": {
-    "dev": "vite --host"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs"
+  "type": "module"
 }
