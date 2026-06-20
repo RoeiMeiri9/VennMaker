@@ -1,6 +1,5 @@
-let mode = 3; // מצב ברירת מחדל: 3 עיגולים
+let mode = 3;
 
-// הגדרות גלובליות של המעגלים (מיקומים ורדיוסים קבועים)
 const circA3 = '<circle cx="150" cy="140" r="90" />';
 const circB3 = '<circle cx="250" cy="140" r="90" />';
 const circC3 = '<circle cx="200" cy="220" r="90" />';
@@ -8,10 +7,6 @@ const circC3 = '<circle cx="200" cy="220" r="90" />';
 const circA2 = '<circle cx="160" cy="100" r="80" />';
 const circB2 = '<circle cx="240" cy="100" r="80" />';
 
-/* מערך האזורים ל-3 עיגולים.
-      mask: מפת ביטים (Bitmask) לייצוג הלוגי (A=1, B=2, C=4).
-      draw: שימוש ב-mask של SVG. לבן (#fff) משאיר את הצבע, שחור (#000) מוחק אותו.
-    */
 const regions3 = [
   {
     id: "A_only",
@@ -50,7 +45,6 @@ const regions3 = [
   },
 ];
 
-// שינוי מצב בין 2 ל-3 עיגולים
 function setCircles(num) {
   mode = num;
   document.getElementById("btn2").classList.toggle("active", num === 2);
@@ -61,18 +55,16 @@ function setCircles(num) {
   renderDiagram();
 }
 
-// פארסר: הופך את הביטוי המתמטי ללוגיקה שהדפדפן מבין (true/false) עבור כל אזור
 function parseExpression(expr, maskValue) {
   let clean = expr
     .toUpperCase()
-    .replace(/\s+/g, "") // הסרת רווחים
-    .replace(/U/g, "|") // איחוד = OR
-    .replace(/N/g, "&") // חיתוך = AND
-    .replace(/\^/g, "^") // הפרש סימטרי = XOR
-    .replace(/!/g, "!") // משלים = NOT
-    .replace(/-/g, "&!"); // הפרש (חיסור): A - B פירושו A AND NOT B
+    .replace(/\s+/g, "")
+    .replace(/U/g, "|")
+    .replace(/N/g, "&")
+    .replace(/\^/g, "^")
+    .replace(/!/g, "!")
+    .replace(/-/g, "&!");
 
-  // בדיקה האם הקבוצות מוכלות באזור הנוכחי לפי ה-Bitmask
   let a = maskValue & 1 ? "true" : "false";
   let b = maskValue & 2 ? "true" : "false";
   let c = maskValue & 4 ? "true" : "false";
@@ -86,7 +78,6 @@ function parseExpression(expr, maskValue) {
   }
 }
 
-// פונקציית הרינדור הראשית
 function renderDiagram() {
   const exprInput = document.getElementById("expression").value;
   const errorDiv = document.getElementById("error-msg");
@@ -103,21 +94,15 @@ function renderDiagram() {
   let svgHtml = `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">`;
   svgHtml += `<defs><style>.outline{fill:none;stroke:#222;stroke-width:2.5;}</style></defs>`;
 
-  /* קבוצת הצביעה הראשית (<g>):
-          כדי למנוע הבדלי גוונים וכפל צבעים, השקיפות (opacity) מוגדרת פעם אחת על כל השכבה.
-          הצבע הפנימי הוא אטום לחלוטין (fill-opacity="1"), מה שגורם לכל החלקים להתמזג פלאט.
-        */
   svgHtml += `<g fill="#34c759" fill-opacity="1" opacity="0.55">`;
   try {
     if (mode === 3) {
-      // לולאה על 7 האזורים המוגדרים
       regions3.forEach((reg) => {
         if (parseExpression(exprInput, reg.mask)) {
-          svgHtml += reg.draw; // הזרקת האלמנט הגיאומטרי המוכן של האזור
+          svgHtml += reg.draw;
         }
       });
     } else {
-      // לוגיקה פשוטה ל-2 עיגולים
       if (parseExpression(exprInput, 1))
         svgHtml += `<g clip-path="url(#clipA2_inv)"><circle cx="160" cy="100" r="80" /></g>`;
       if (parseExpression(exprInput, 2))
@@ -125,7 +110,6 @@ function renderDiagram() {
       if (parseExpression(exprInput, 3))
         svgHtml += `<g clip-path="url(#clipA2)"><circle cx="240" cy="100" r="80" /></g>`;
 
-      // תוספת הגדרות חיתוך ספציפיות ל-2 עיגולים (למקרה של איחוד/חיתוך)
       svgHtml = svgHtml.replace(
         "<defs>",
         `<defs><clipPath id="clipA2">${circA2}</clipPath><clipPath id="clipB2">${circB2}</clipPath>`,
@@ -137,7 +121,6 @@ function renderDiagram() {
   }
   svgHtml += `</g>`;
 
-  // שכבה עליונה: ציור קווי המתאר השחורים והטקסטים (כדי שלא יכוסו ע"י הצבע)
   if (mode === 3) {
     svgHtml += `<g class="outline">${circA3}${circB3}${circC3}</g>`;
     svgHtml += `<text x="70" y="100" font-size="20" font-weight="bold">A</text>`;
@@ -153,7 +136,6 @@ function renderDiagram() {
   document.getElementById("svg-container").innerHTML = svgHtml;
 }
 
-// הרצה ראשונית אוטומטית עם טעינת הדף
 renderDiagram();
 
 const inputField = document.getElementById("expression");
@@ -161,7 +143,6 @@ const inputField = document.getElementById("expression");
 inputField.addEventListener("input", (e) => {
   let value = e.target.value;
 
-  // מפת תרגום זריזה של האותיות הרלוונטיות מעברית לאנגלית (לפי המיקום במקלדת)
   const hebrewToEnglish = {
     ש: "A",
     נ: "B",
@@ -170,7 +151,6 @@ inputField.addEventListener("input", (e) => {
     מ: "n",
   };
 
-  // החלפת האותיות בהתאם למפה
   let correctedValue = value
     .split("")
     .map((char) => hebrewToEnglish[char] || char)
@@ -178,7 +158,7 @@ inputField.addEventListener("input", (e) => {
 
   if (value !== correctedValue) {
     e.target.value = correctedValue;
-    renderDiagram(); // מרנדר מחדש אוטומטית עם האות הנכונה
+    renderDiagram();
   }
 });
 
@@ -186,11 +166,9 @@ function copySVGAsImage() {
   const errorDiv = document.getElementById("error-msg");
   const exprInput = document.getElementById("expression").value;
 
-  // 1. הגדרת מידות ענקיות (פי 4) ישירות כבסיס
   const width = 1600;
   const height = mode === 3 ? 1440 : 880;
 
-  // 2. בניית גרסה מוגדלת של המעגלים (הכל מוכפל פי 4 מהמקור)
   const circA3_large = '<circle cx="600" cy="560" r="360" />';
   const circB3_large = '<circle cx="1000" cy="560" r="360" />';
   const circC3_large = '<circle cx="800" cy="880" r="360" />';
@@ -198,7 +176,6 @@ function copySVGAsImage() {
   const circA2_large = '<circle cx="640" cy="400" r="320" />';
   const circB2_large = '<circle cx="960" cy="400" r="320" />';
 
-  // מערך האזורים ל-3 עיגולים בגרסה הגדולה
   const regions3_large = [
     {
       mask: 1,
@@ -230,7 +207,6 @@ function copySVGAsImage() {
     },
   ];
 
-  // 3. בניית מחרוזת ה-SVG הגדולה מאפס
   let svgHtml = `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">`;
   svgHtml += `<defs><style>.outline{fill:none;stroke:#222;stroke-width:10;}</style></defs>`; // קו עבה יותר (10) שיתאים לרזולוציה
   svgHtml += `<g fill="#34c759" fill-opacity="1" opacity="0.55">`;
@@ -258,7 +234,6 @@ function copySVGAsImage() {
   }
   svgHtml += `</g>`;
 
-  // קווים ואותיות במיקומים מוגדלים ומדויקים (פי 4 מהמיקומים ב-UI)
   if (mode === 3) {
     svgHtml += `<g class="outline">${circA3_large}${circB3_large}${circC3_large}</g>`;
     svgHtml += `<text x="180" y="440" font-size="88" font-weight="bold" font-family="system-ui">A</text>`;
@@ -271,7 +246,6 @@ function copySVGAsImage() {
   }
   svgHtml += `</svg>`;
 
-  // 4. יצירת ה-Blob והקנבס מה-SVG הגדול החדש
   const svgBlob = new Blob([svgHtml], { type: "image/svg+xml;charset=utf-8" });
   const url = URL.createObjectURL(svgBlob);
 
@@ -285,53 +259,37 @@ function copySVGAsImage() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.imageSmoothingEnabled = true;
     ctx.imageSmoothingQuality = "high";
-    ctx.drawImage(img, 0, 0); // ציור פשוט 1:1, בלי מתיחות ובלי הפתעות
+    ctx.drawImage(img, 0, 0);
 
     canvas.toBlob(function (pngBlob) {
       const oldOverlay = document.getElementById("venn-overlay");
       if (oldOverlay) oldOverlay.remove();
 
-      // בניית ה-Overlay המעוצב
       const overlay = document.createElement("div");
       overlay.id = "venn-overlay";
-      overlay.style.cssText = `
-                position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-                background-color: rgba(0, 0, 0, 0.4); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-                display: flex; flex-direction: column; align-items: center; justify-content: center;
-                z-index: 9999; opacity: 0; transition: opacity 0.3s ease; font-family: system-ui, -apple-system, sans-serif;
-            `;
 
       const modal = document.createElement("div");
-      modal.style.cssText = `
-                background: white; padding: 24px; border-radius: 20px; box-shadow: 0 12px 40px rgba(0,0,0,0.25);
-                max-width: 90%; width: 450px; text-align: center; position: relative; transform: scale(0.9); transition: transform 0.3s ease;
-            `;
+      modal.className = "venn-modal";
 
       const closeBtn = document.createElement("button");
       closeBtn.innerHTML = "✕";
-      closeBtn.style.cssText = `
-                position: absolute; top: 16px; right: 16px; background: #f0f0f5; border: none; width: 32px; height: 32px;
-                border-radius: 50%; font-size: 14px; cursor: pointer; color: #666; display: flex; align-items: center; justify-content: center; font-weight: bold;
-            `;
+      closeBtn.className = "venn-modal-close";
       closeBtn.onclick = () => {
         overlay.remove();
       };
 
       const title = document.createElement("h3");
       title.innerText = "הדיאגרמה מוכנה להעתקה";
-      title.style.cssText =
-        "margin: 0 0 8px 0; color: #1a1a1a; font-size: 1.2rem;";
+      title.className = "venn-modal-title";
 
       const subtitle = document.createElement("p");
       subtitle.innerHTML =
         '<strong>לחץ לחיצה ארוכה</strong> על התמונה מטה,<br>ובחר <strong>"העתק" (Copy)</strong> כדי להדביק בנוטאביליטי.';
-      subtitle.style.cssText =
-        "margin: 0 0 20px 0; color: #666; font-size: 0.95rem; line-height: 1.4;";
+      subtitle.className = "venn-modal-subtitle";
 
       const tempImg = document.createElement("img");
       tempImg.src = URL.createObjectURL(pngBlob);
-      tempImg.style.cssText =
-        "max-width: 100%; height: auto; border-radius: 12px; border: 1px solid #e5e5ea; background: #fff; -webkit-touch-callout: default;";
+      tempImg.className = "venn-modal-img";
 
       modal.appendChild(closeBtn);
       modal.appendChild(title);
