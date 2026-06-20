@@ -30,7 +30,7 @@ To run the generator locally on your machine (and access it from your iPad/table
 ### 1. Clone the repository
 
 ```bash
-git clone [https://github.com/RoeiMeiri9/VennMaker.git](https://github.com/RoeiMeiri9/VennMaker.git)
+git clone https://github.com/RoeiMeiri9/VennMaker.git
 cd VennMaker
 ```
 
@@ -58,4 +58,4 @@ npm run build
 
 ## License
 
-This project is open-source and free to use under the [MIT License](https://www.google.com/search?q=LICENSE). Feel free to fork, vibe-code, and improve it!
+This project is open-source and free to use under the [MIT License](./LICENSE). Feel free to fork, vibe-code, and improve it!
