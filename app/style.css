@@ -1,3 +1,7 @@
+.katex {
+  font-family: "KaTeX_Main", serif;
+}
+
 body {
   font-family:
     system-ui,
@@ -96,14 +100,75 @@ button:hover {
   margin-top: 10px;
   min-height: 20px;
 }
+
 .legend {
-  font-size: 0.85rem;
-  color: #555;
+  margin-top: 24px;
+  padding: 16px;
+  background-color: #f8f9fa;
+  border: 1px solid #e5e5ea;
+  border-radius: 12px;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
   text-align: right;
-  line-height: 1.6;
-  background: #f9f9f9;
-  padding: 10px;
-  border-radius: 8px;
+  direction: rtl;
+}
+
+.legend-title {
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+}
+
+.legend-grid {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed #e5e5ea;
+}
+
+.legend-item {
+  font-size: 0.9rem;
+  color: #48484a;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.legend .key {
+  background: #e5e5ea;
+  color: #1c1c1e;
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 0.95rem;
+}
+
+.legend .math-sym {
+  color: #8e8e93;
+  font-size: 0.85rem;
+}
+
+.legend-examples {
+  font-size: 0.85rem;
+  color: #636366;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.legend .ex {
+  background: #ffffff;
+  border: 1px solid #d1d1d6;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-family: monospace;
+  direction: ltr;
 }
 
 #venn-overlay {

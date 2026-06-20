@@ -5,6 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>מחולל דיאגרמות וון</title>
     <link rel="stylesheet" href="app/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+    ></script>
   </head>
   <body>
     <div class="container">
@@ -33,20 +45,45 @@
             autocorrect="off"
           />
         </div>
-        <div id="error-msg" class="error"></div>
+        <div id="error-msg" class="error"> </div>
       </div>
 
-      <div id="svg-container"></div>
+      <div id="svg-container"> </div>
 
       <button onclick="copySVGAsImage()">העתק SVG</button>
 
-      <div class="legend" style="margin-top: 20px">
-        <strong>מדריך סימנים:</strong><br />
-        • <code>U</code> - איחוד | • <code>n</code> - חיתוך | • <code>-</code> -
-        הפרש (חיסור)<br />
-        • <code>^</code> - הפרש סימטרי | • <code>!</code> - משלים (NOT)<br />
-        • <strong>דוגמאות:</strong> <code>A - B</code> או
-        <code>A - (B n C)</code> או <code>(A U B) - C</code>
+      <div class="legend">
+        <div class="legend-title">מדריך סימנים מהיר</div>
+
+        <div class="legend-grid">
+          <div class="legend-item">
+            <span class="key">U</span> איחוד
+            <span class="math-sym">($\cup$)</span>
+          </div>
+          <div class="legend-item">
+            <span class="key">n</span> חיתוך
+            <span class="math-sym">($\cap$)</span>
+          </div>
+          <div class="legend-item">
+            <span class="key">-</span> הפרש / חיסור
+            <span class="math-sym">( \ )</span>
+          </div>
+          <div class="legend-item">
+            <span class="key">^</span> הפרש סימטרי
+            <span class="math-sym">($\oplus$)</span>
+          </div>
+          <div class="legend-item">
+            <span class="key">!</span> משלים
+            <span class="math-sym">($\overline{A}$)</span>
+          </div>
+        </div>
+
+        <div class="legend-examples">
+          <strong>דוגמאות לשימוש:</strong>
+          <code class="ex">A - B</code>
+          <code class="ex">A - (B n C)</code>
+          <code class="ex">(A U B) - C</code>
+        </div>
       </div>
     </div>
 
