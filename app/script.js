@@ -1,67 +1,81 @@
 let mode = 3;
 
-const circA3 = '<circle cx="150" cy="140" r="90" />';
-const circB3 = '<circle cx="250" cy="140" r="90" />';
-const circC3 = '<circle cx="200" cy="220" r="90" />';
+const CONFIG = {
+  3: {
+    width: 400,
+    height: 360,
+    cA: { cx: 150, cy: 140, r: 90 },
+    cB: { cx: 250, cy: 140, r: 90 },
+    cC: { cx: 200, cy: 220, r: 90 },
+  },
+  2: {
+    width: 400,
+    height: 220,
+    cA: { cx: 160, cy: 110, r: 90 }, // מרכזנו את העיגולים טוב יותר
+    cB: { cx: 240, cy: 110, r: 90 },
+  },
+};
 
-const circA2 = '<circle cx="160" cy="100" r="80" />';
-const circB2 = '<circle cx="240" cy="100" r="80" />';
+function getRegions(m = 1) {
+  const A = { cx: 150 * m, cy: 140 * m, r: 90 * m };
+  const B = { cx: 250 * m, cy: 140 * m, r: 90 * m };
+  const C = { cx: 200 * m, cy: 220 * m, r: 90 * m };
 
-const regions3 = [
-  {
-    id: "A_only",
-    mask: 1,
-    draw: `<mask id="mA_only"><rect width="400" height="360" fill="#fff"/> ${circB3.replace("/>", 'fill="#000"/>')} ${circC3.replace("/>", 'fill="#000"/>')} </mask><g mask="url(#mA_only)">${circA3}</g>`,
-  },
-  {
-    id: "B_only",
-    mask: 2,
-    draw: `<mask id="mB_only"><rect width="400" height="360" fill="#fff"/> ${circA3.replace("/>", 'fill="#000"/>')} ${circC3.replace("/>", 'fill="#000"/>')} </mask><g mask="url(#mB_only)">${circB3}</g>`,
-  },
-  {
-    id: "C_only",
-    mask: 4,
-    draw: `<mask id="mC_only"><rect width="400" height="360" fill="#fff"/> ${circA3.replace("/>", 'fill="#000"/>')} ${circB3.replace("/>", 'fill="#000"/>')} </mask><g mask="url(#mC_only)">${circC3}</g>`,
-  },
-  {
-    id: "A_n_B_only",
-    mask: 3,
-    draw: `<clipPath id="cAB">${circA3}</clipPath><mask id="mAB"><rect width="400" height="360" fill="#fff"/> ${circC3.replace("/>", 'fill="#000"/>')} </mask><g clip-path="url(#cAB)" mask="url(#mAB)">${circB3}</g>`,
-  },
-  {
-    id: "A_n_C_only",
-    mask: 5,
-    draw: `<clipPath id="cAC">${circA3}</clipPath><mask id="mAC"><rect width="400" height="360" fill="#fff"/> ${circB3.replace("/>", 'fill="#000"/>')} </mask><g clip-path="url(#cAC)" mask="url(#mAC)">${circC3}</g>`,
-  },
-  {
-    id: "B_n_C_only",
-    mask: 6,
-    draw: `<clipPath id="cBC">${circB3}</clipPath><mask id="mBC"><rect width="400" height="360" fill="#fff"/> ${circA3.replace("/>", 'fill="#000"/>')} </mask><g clip-path="url(#cBC)" mask="url(#mBC)">${circC3}</g>`,
-  },
-  {
-    id: "A_n_B_n_C",
-    mask: 7,
-    draw: `<clipPath id="cABC_A">${circA3}</clipPath><clipPath id="cABC_B">${circB3}</clipPath><g clip-path="url(#cABC_A)"><g clip-path="url(#cABC_B)">${circC3}</g></g>`,
-  },
-];
+  const A2 = { cx: 160 * m, cy: 110 * m, r: 90 * m };
+  const B2 = { cx: 240 * m, cy: 110 * m, r: 90 * m };
 
-const regions2 = [
-  {
-    id: "A_only",
-    mask: 1,
-    draw: `<mask id="mA2"><rect width="400" height="220" fill="#fff"/> <circle cx="240" cy="100" r="80" fill="#000"/></mask><g mask="url(#mA2)">${circA2}</g>`,
-  },
-  {
-    id: "B_only",
-    mask: 2,
-    draw: `<mask id="mB2"><rect width="400" height="220" fill="#fff"/> <circle cx="160" cy="100" r="80" fill="#000"/></mask><g mask="url(#mB2)">${circB2}</g>`,
-  },
-  {
-    id: "A_n_B",
-    mask: 3,
-    draw: `<clipPath id="cAB2">${circA2}</clipPath><g clip-path="url(#cAB2)">${circB2}</g>`,
-  },
-];
+  const w = 400 * m;
+  const h3 = 360 * m;
+  const h2 = 220 * m;
+
+  if (mode === 3) {
+    return [
+      {
+        mask: 1,
+        draw: `<mask id="mA"><rect width="${w}" height="${h3}" fill="#fff"/><circle cx="${B.cx}" cy="${B.cy}" r="${B.r}" fill="#000"/><circle cx="${C.cx}" cy="${C.cy}" r="${C.r}" fill="#000"/></mask><g mask="url(#mA)"><circle cx="${A.cx}" cy="${A.cy}" r="${A.r}"/></g>`,
+      },
+      {
+        mask: 2,
+        draw: `<mask id="mB"><rect width="${w}" height="${h3}" fill="#fff"/><circle cx="${A.cx}" cy="${A.cy}" r="${A.r}" fill="#000"/><circle cx="${C.cx}" cy="${C.cy}" r="${C.r}" fill="#000"/></mask><g mask="url(#mB)"><circle cx="${B.cx}" cy="${B.cy}" r="${B.r}"/></g>`,
+      },
+      {
+        mask: 4,
+        draw: `<mask id="mC"><rect width="${w}" height="${h3}" fill="#fff"/><circle cx="${A.cx}" cy="${A.cy}" r="${A.r}" fill="#000"/><circle cx="${B.cx}" cy="${B.cy}" r="${B.r}" fill="#000"/></mask><g mask="url(#mC)"><circle cx="${C.cx}" cy="${C.cy}" r="${C.r}"/></g>`,
+      },
+      {
+        mask: 3,
+        draw: `<clipPath id="cAB"><circle cx="${A.cx}" cy="${A.cy}" r="${A.r}"/></clipPath><mask id="mAB"><rect width="${w}" height="${h3}" fill="#fff"/><circle cx="${C.cx}" cy="${C.cy}" r="${C.r}" fill="#000"/></mask><g clip-path="url(#cAB)" mask="url(#mAB)"><circle cx="${B.cx}" cy="${B.cy}" r="${B.r}"/></g>`,
+      },
+      {
+        mask: 5,
+        draw: `<clipPath id="cAC"><circle cx="${A.cx}" cy="${A.cy}" r="${A.r}"/></clipPath><mask id="mAC"><rect width="${w}" height="${h3}" fill="#fff"/><circle cx="${B.cx}" cy="${B.cy}" r="${B.r}" fill="#000"/></mask><g clip-path="url(#cAC)" mask="url(#mAC)"><circle cx="${C.cx}" cy="${C.cy}" r="${C.r}"/></g>`,
+      },
+      {
+        mask: 6,
+        draw: `<clipPath id="cBC"><circle cx="${B.cx}" cy="${B.cy}" r="${B.r}"/></clipPath><mask id="mBC"><rect width="${w}" height="${h3}" fill="#fff"/><circle cx="${A.cx}" cy="${A.cy}" r="${A.r}" fill="#000"/></mask><g clip-path="url(#cBC)" mask="url(#mBC)"><circle cx="${C.cx}" cy="${C.cy}" r="${C.r}"/></g>`,
+      },
+      {
+        mask: 7,
+        draw: `<clipPath id="cABC1"><circle cx="${A.cx}" cy="${A.cy}" r="${A.r}"/></clipPath><clipPath id="cABC2"><circle cx="${B.cx}" cy="${B.cy}" r="${B.r}"/></clipPath><g clip-path="url(#cABC1)"><g clip-path="url(#cABC2)"><circle cx="${C.cx}" cy="${C.cy}" r="${C.r}"/></g></g>`,
+      },
+    ];
+  } else {
+    return [
+      {
+        mask: 1,
+        draw: `<mask id="mA2"><rect width="${w}" height="${h2}" fill="#fff"/><circle cx="${B2.cx}" cy="${B2.cy}" r="${B2.r}" fill="#000"/></mask><g mask="url(#mA2)"><circle cx="${A2.cx}" cy="${A2.cy}" r="${A2.r}"/></g>`,
+      },
+      {
+        mask: 2,
+        draw: `<mask id="mB2"><rect width="${w}" height="${h2}" fill="#fff"/><circle cx="${A2.cx}" cy="${A2.cy}" r="${A2.r}" fill="#000"/></mask><g mask="url(#mB2)"><circle cx="${B2.cx}" cy="${B2.cy}" r="${B2.r}"/></g>`,
+      },
+      {
+        mask: 3,
+        draw: `<clipPath id="cAB2"><circle cx="${A2.cx}" cy="${A2.cy}" r="${A2.r}"/></clipPath><g clip-path="url(#cAB2)"><circle cx="${B2.cx}" cy="${B2.cy}" r="${B2.r}"/></g>`,
+      },
+    ];
+  }
+}
 
 function setCircles(num) {
   mode = num;
@@ -99,6 +113,38 @@ function parseExpression(expr, maskValue) {
   }
 }
 
+function generateSVG(
+  exprInput,
+  width,
+  height,
+  errorDiv = undefined,
+  isLarge = false,
+) {
+  let svgHtml = `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">`;
+  svgHtml += `<defs><style>.outline{fill:none;stroke:#222;stroke-width:${isLarge ? 10 : 2.5}</style></defs>`;
+
+  svgHtml += `<g fill="#34c759" fill-opacity="1" opacity="0.55">`;
+  const m = isLarge ? 4 : 1;
+
+  try {
+    const regions = getRegions(m);
+    regions.forEach((reg) => {
+      if (parseExpression(exprInput, reg.mask)) svgHtml += reg.draw;
+    });
+  } catch (err) {
+    if (errorDiv) errorDiv.innerText = "שגיאה בביטוי המתמטי.";
+    else alert("שגיאה בביטוי המתמטי.");
+    console.error(err);
+    return;
+  }
+  svgHtml += `</g>`;
+
+  svgHtml = placeObjectsInSVG(svgHtml, mode, m);
+
+  svgHtml += `</svg>`;
+  return svgHtml;
+}
+
 function renderDiagram() {
   const exprInput = document.getElementById("expression").value;
   const errorDiv = document.getElementById("error-msg");
@@ -112,52 +158,39 @@ function renderDiagram() {
   const width = 400;
   const height = mode === 3 ? 360 : 220;
 
-  let svgHtml = `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">`;
-  svgHtml += `<defs><style>.outline{fill:none;stroke:#222;stroke-width:2.5;}</style></defs>`;
+  let svgHtml = generateSVG(exprInput, width, height, errorDiv, false);
 
-  svgHtml += `<g fill="#34c759" fill-opacity="1" opacity="0.55">`;
-  try {
-    const currentRegions = mode === 3 ? regions3 : regions2;
-
-    currentRegions.forEach((reg) => {
-      if (parseExpression(exprInput, reg.mask)) {
-        svgHtml += reg.draw;
-      }
-    });
-  } catch (err) {
-    errorDiv.innerText = "שגיאה בביטוי המתמטי.";
-    return;
-  }
-  svgHtml += `</g>`;
-
-  svgHtml = placeText(svgHtml, mode, circA3, circB3, circC3, circA2, circB2);
-
-  svgHtml += `</svg>`;
   document.getElementById("svg-container").innerHTML = svgHtml;
 }
 
-function placeText(
-  svgHtml,
-  mode,
-  circA3,
-  circB3,
-  circC3,
-  circA2,
-  circB2,
-  multiply = 1,
-) {
+function placeObjectsInSVG(svgHtml, mode, m = 1) {
+  const cfg = CONFIG[mode];
+
+  let outlines = "";
   if (mode === 3) {
-    svgHtml += `<g class="outline">${circA3}${circB3}${circC3}</g>`;
-
-    svgHtml += `<text x="${45 * multiply}" y="${110 * multiply}" font-size="${22 * multiply}" font-weight="bold" font-family="system-ui" text-anchor="middle">A</text>`;
-    svgHtml += `<text x="${355 * multiply}" y="${110 * multiply}" font-size="${22 * multiply}" font-weight="bold" font-family="system-ui" text-anchor="middle">B</text>`;
-    svgHtml += `<text x="${200 * multiply}" y="${340 * multiply}" font-size="${22 * multiply}" font-weight="bold" font-family="system-ui" text-anchor="middle">C</text>`;
+    outlines = `<circle cx="${cfg.cA.cx * m}" cy="${cfg.cA.cy * m}" r="${cfg.cA.r * m}" /><circle cx="${cfg.cB.cx * m}" cy="${cfg.cB.cy * m}" r="${cfg.cB.r * m}" /><circle cx="${cfg.cC.cx * m}" cy="${cfg.cC.cy * m}" r="${cfg.cC.r * m}" />`;
   } else {
-    svgHtml += `<g class="outline">${circA2}${circB2}</g>`;
-
-    svgHtml += `<text x="${60 * multiply}" y="${105 * multiply}" font-size="${22 * multiply}" font-weight="bold" font-family="system-ui" text-anchor="middle">A</text>`;
-    svgHtml += `<text x="${340 * multiply}" y="${105 * multiply}" font-size="${22 * multiply}" font-weight="bold" font-family="system-ui" text-anchor="middle">B</text>`;
+    outlines = `<circle cx="${cfg.cA.cx * m}" cy="${cfg.cA.cy * m}" r="${cfg.cA.r * m}" /><circle cx="${cfg.cB.cx * m}" cy="${cfg.cB.cy * m}" r="${cfg.cB.r * m}" />`;
   }
+  svgHtml += `<g class="outline">${outlines}</g>`;
+
+  const fontSize = 22 * m;
+  const paddingLR = 110;
+  const labels =
+    mode === 3
+      ? [
+          { text: "A", x: cfg.cA.cx - paddingLR, y: cfg.cA.cy },
+          { text: "B", x: cfg.cB.cx + paddingLR, y: cfg.cB.cy },
+          { text: "C", x: cfg.cC.cx, y: cfg.cC.cy + 120 },
+        ]
+      : [
+          { text: "A", x: cfg.cA.cx - paddingLR, y: cfg.cA.cy },
+          { text: "B", x: cfg.cB.cx + paddingLR, y: cfg.cB.cy },
+        ];
+
+  labels.forEach((label) => {
+    svgHtml += `<text x="${label.x * m}" y="${label.y * m}" font-size="${fontSize}" font-weight="bold" font-family="system-ui" text-anchor="middle">${label.text}</text>`;
+  });
 
   return svgHtml;
 }
@@ -195,83 +228,7 @@ function copySVGAsImage() {
   const width = 1600;
   const height = mode === 3 ? 1440 : 880;
 
-  const circA3_large = '<circle cx="600" cy="560" r="360" />';
-  const circB3_large = '<circle cx="1000" cy="560" r="360" />';
-  const circC3_large = '<circle cx="800" cy="880" r="360" />';
-
-  const circA2_large = '<circle cx="640" cy="400" r="320" />';
-  const circB2_large = '<circle cx="960" cy="400" r="320" />';
-
-  const regions3_large = [
-    {
-      mask: 1,
-      draw: `<mask id="mA_only_l"><rect width="1600" height="1440" fill="#fff"/> ${circB3_large.replace("/>", 'fill="#000"/>')} ${circC3_large.replace("/>", 'fill="#000"/>')} </mask><g mask="url(#mA_only_l)">${circA3_large}</g>`,
-    },
-    {
-      mask: 2,
-      draw: `<mask id="mB_only_l"><rect width="1600" height="1440" fill="#fff"/> ${circA3_large.replace("/>", 'fill="#000"/>')} ${circC3_large.replace("/>", 'fill="#000"/>')} </mask><g mask="url(#mB_only_l)">${circB3_large}</g>`,
-    },
-    {
-      mask: 4,
-      draw: `<mask id="mC_only_l"><rect width="1600" height="1440" fill="#fff"/> ${circA3_large.replace("/>", 'fill="#000"/>')} ${circB3_large.replace("/>", 'fill="#000"/>')} </mask><g mask="url(#mC_only_l)">${circC3_large}</g>`,
-    },
-    {
-      mask: 3,
-      draw: `<clipPath id="cAB_l">${circA3_large}</clipPath><mask id="mAB_l"><rect width="1600" height="1440" fill="#fff"/> ${circC3_large.replace("/>", 'fill="#000"/>')} </mask><g clip-path="url(#cAB_l)" mask="url(#mAB_l)">${circB3_large}</g>`,
-    },
-    {
-      mask: 5,
-      draw: `<clipPath id="cAC_l">${circA3_large}</clipPath><mask id="mAC_l"><rect width="1600" height="1440" fill="#fff"/> ${circB3_large.replace("/>", 'fill="#000"/>')} </mask><g clip-path="url(#cAC_l)" mask="url(#mAC_l)">${circC3_large}</g>`,
-    },
-    {
-      mask: 6,
-      draw: `<clipPath id="cBC_l">${circB3_large}</clipPath><mask id="mBC_l"><rect width="1600" height="1440" fill="#fff"/> ${circA3_large.replace("/>", 'fill="#000"/>')} </mask><g clip-path="url(#cBC_l)" mask="url(#mBC_l)">${circC3_large}</g>`,
-    },
-    {
-      mask: 7,
-      draw: `<clipPath id="cABC_A_l">${circA3_large}</clipPath><clipPath id="cABC_B_l">${circB3_large}</clipPath><g clip-path="url(#cABC_A_l)"><g clip-path="url(#cABC_B_l)">${circC3_large}</g></g>`,
-    },
-  ];
-
-  let svgHtml = `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">`;
-  svgHtml += `<defs><style>.outline{fill:none;stroke:#222;stroke-width:10;}</style></defs>`; // קו עבה יותר (10) שיתאים לרזולוציה
-  svgHtml += `<g fill="#34c759" fill-opacity="1" opacity="0.55">`;
-
-  try {
-    if (mode === 3) {
-      regions3_large.forEach((reg) => {
-        if (parseExpression(exprInput, reg.mask)) svgHtml += reg.draw;
-      });
-    } else {
-      if (parseExpression(exprInput, 1))
-        svgHtml += `<g clip-path="url(#clipA2_l_inv)">${circA2_large}</g>`;
-      if (parseExpression(exprInput, 2))
-        svgHtml += `<g clip-path="url(#clipB2_l_inv)">${circB2_large}</g>`;
-      if (parseExpression(exprInput, 3))
-        svgHtml += `<g clip-path="url(#clipA2_l)">${circB2_large}</g>`;
-      svgHtml = svgHtml.replace(
-        "<defs>",
-        `<defs><clipPath id="clipA2_l">${circA2_large}</clipPath><clipPath id="clipB2_l">${circB2_large}</clipPath>`,
-      );
-    }
-  } catch (err) {
-    alert("שגיאה בביטוי המתמטי.");
-    return;
-  }
-  svgHtml += `</g>`;
-
-  svgHtml = placeText(
-    svgHtml,
-    mode,
-    circA3_large,
-    circB3_large,
-    circC3_large,
-    circA2_large,
-    circB2_large,
-    4,
-  );
-
-  svgHtml += `</svg>`;
+  let svgHtml = generateSVG(exprInput, width, height, undefined, true);
 
   const svgBlob = new Blob([svgHtml], { type: "image/svg+xml;charset=utf-8" });
   const url = URL.createObjectURL(svgBlob);
