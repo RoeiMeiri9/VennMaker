@@ -312,3 +312,7 @@ function copySVGAsImage() {
 
   img.src = url;
 }
+
+window.copySVGAsImage = copySVGAsImage;
+window.renderDiagram = renderDiagram;
+window.setCircles = setCircles;
