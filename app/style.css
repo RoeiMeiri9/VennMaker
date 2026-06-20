@@ -1,0 +1,107 @@
+body {
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
+  background-color: #f4f4f7;
+  color: #333;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.container {
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  max-width: 600px;
+  width: 100%;
+  text-align: center;
+}
+h1 {
+  margin-bottom: 5px;
+  color: #1a1a1a;
+}
+p.subtitle {
+  color: #666;
+  margin-top: 0;
+  font-size: 0.9rem;
+}
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+.row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+input[type="text"] {
+  flex: 1;
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  text-align: left;
+  direction: ltr;
+}
+input[type="text"]:focus {
+  border-color: #007aff;
+  outline: none;
+}
+button {
+  padding: 12px 24px;
+  background-color: #007aff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+button:hover {
+  background-color: #0056b3;
+}
+.toggle-btn {
+  background-color: #e5e5ea;
+  color: #333;
+}
+.toggle-btn:hover {
+  background-color: #d0d0d7;
+}
+.toggle-btn.active {
+  background-color: #34c759;
+  color: white;
+}
+.toggle-btn.active:hover {
+  background-color: #27b14a;
+}
+#svg-container {
+  margin-top: 30px;
+  margin-bottom: 10px;
+  background: #fff;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px dashed #ccc;
+  display: flex;
+  justify-content: center;
+}
+.error {
+  color: #ff3b30;
+  font-weight: bold;
+  margin-top: 10px;
+  min-height: 20px;
+}
+.legend {
+  font-size: 0.85rem;
+  color: #555;
+  text-align: right;
+  line-height: 1.6;
+  background: #f9f9f9;
+  padding: 10px;
+  border-radius: 8px;
+}

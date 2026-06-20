@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>מחולל דיאגרמות וון - גרסה סופית ויציבה</title>
+    <link rel="stylesheet" href="app/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>מחולל דיאגרמות וון וקטורי</h1>
+      <p class="subtitle">הזן ביטוי מתמטי לקבלת צביעה מדויקת של אזורי חפיפה</p>
+
+      <div class="controls">
+        <div class="row">
+          <button id="btn2" class="toggle-btn" onclick="setCircles(2)"
+            >2 עיגולים</button
+          >
+          <button id="btn3" class="toggle-btn active" onclick="setCircles(3)"
+            >3 עיגולים</button
+          >
+        </div>
+
+        <div class="row">
+          <input
+            type="text"
+            id="expression"
+            value="A - (B n C)"
+            placeholder="לדוגמה: (A U B) - C"
+            onkeypress="renderDiagram()"
+            lang="en"
+            autocapitalize="none"
+            autocorrect="off"
+          />
+        </div>
+        <div id="error-msg" class="error"></div>
+      </div>
+
+      <div id="svg-container"></div>
+
+      <button onclick="copySVGAsImage()">העתק SVG</button>
+
+      <div class="legend" style="margin-top: 20px">
+        <strong>מדריך סימנים:</strong><br />
+        • <code>U</code> - איחוד | • <code>n</code> - חיתוך | • <code>-</code> -
+        הפרש (חיסור)<br />
+        • <code>^</code> - הפרש סימטרי | • <code>!</code> - משלים (NOT)<br />
+        • <strong>דוגמאות:</strong> <code>A - B</code> או
+        <code>A - (B n C)</code> או <code>(A U B) - C</code>
+      </div>
+    </div>
+
+    <script src="app/script.js"></script>
+  </body>
+</html>

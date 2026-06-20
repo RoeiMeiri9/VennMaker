@@ -1,0 +1,13 @@
+{
+  "name": "venmaker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "site/script.js",
+  "scripts": {
+    "dev": "vite --host"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}
