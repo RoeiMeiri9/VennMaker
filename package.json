@@ -2,7 +2,7 @@
   "name": "vennmaker",
   "version": "1.0.0",
   "description": "",
-  "main": "app/script.js",
+  "main": "app/init.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
