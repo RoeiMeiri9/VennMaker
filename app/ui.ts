@@ -21,6 +21,26 @@ export async function copySVGAsImage() {
     showImageModal(pngBlob);
   }
 }
+import katex from "katex";
+import "katex/dist/katex.min.css"; // חשוב שזה יהיה כאן או ב-main.ts
+
+export function renderMathSymbols() {
+  const mathSymList = document.querySelectorAll<HTMLElement>(".math-sym");
+
+  mathSymList.forEach((mathSym) => {
+    // נקה את הדולרים לפני השליחה כדי למנוע את השגיאה שראינו קודם
+    const formula = mathSym.innerText.trim().replace(/\$/g, "");
+
+    try {
+      katex.render(formula, mathSym, {
+        throwOnError: true,
+        displayMode: true,
+      });
+    } catch (e) {
+      console.error(`Error rendering formula: "${formula}"`, e);
+    }
+  });
+}
 
 export function initUI() {
   const { expression, btn2, btn3 } = state;
@@ -40,8 +60,6 @@ export function initUI() {
 
   window.renderDiagram = renderDiagram;
   window.copySVGAsImage = copySVGAsImage;
-
-  renderDiagram();
 }
 
 function setMode(num: number) {
