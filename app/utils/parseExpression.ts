@@ -1,25 +1,25 @@
+import { safeEvaluate } from "@core/logic-parser";
+
 export function parseExpression(expr: string, maskValue: number) {
-  let clean = expr
+  const clean = expr
     .toUpperCase()
     .replace(/\s+/g, "")
     .replace(/U/g, "|")
     .replace(/N/g, "&")
     .replace(/\^/g, "^")
-    .replace(/!/g, "!")
-    .replace(/-/g, "&!");
-
-  let a = maskValue & 1 ? "true" : "false";
-  let b = maskValue & 2 ? "true" : "false";
-  let c = maskValue & 4 ? "true" : "false";
-
-  clean = clean
-    .replace(/A/g, `(${a})`)
-    .replace(/B/g, `(${b})`)
-    .replace(/C/g, `(${c})`);
+    .replace(/!/g, "!");
+  const values = {
+    A: (maskValue & 1) !== 0,
+    B: (maskValue & 2) !== 0,
+    C: (maskValue & 4) !== 0,
+  };
 
   try {
-    return !!eval(clean);
+    const result = safeEvaluate(clean, values);
+    console.log(`Mask: ${maskValue}, Values:`, values, `Result: ${result}`);
+    return result;
   } catch (e) {
-    throw new Error("שגיאה בניסוח הביטוי.");
+    console.error(e);
+    return false;
   }
 }
