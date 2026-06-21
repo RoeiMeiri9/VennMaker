@@ -1,4 +1,4 @@
-export function parseExpression(expr, maskValue) {
+export function parseExpression(expr: string, maskValue: number) {
   let clean = expr
     .toUpperCase()
     .replace(/\s+/g, "")
@@ -22,19 +22,4 @@ export function parseExpression(expr, maskValue) {
   } catch (e) {
     throw new Error("שגיאה בניסוח הביטוי.");
   }
-}
-
-const hebrewToEnglish = {
-  ש: "A",
-  נ: "B",
-  ב: "C",
-  ו: "u",
-  מ: "n",
-};
-
-export function translateHebrewInput(value) {
-  return value
-    .split("")
-    .map((char) => hebrewToEnglish[char] || char)
-    .join("");
 }

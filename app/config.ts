@@ -1,4 +1,12 @@
-export const CONFIG = {
+export interface RegionConfig {
+  width: number;
+  height: number;
+  cA: { cx: number; cy: number; r: number };
+  cB: { cx: number; cy: number; r: number };
+  cC?: { cx: number; cy: number; r: number };
+}
+
+export const CONFIG: Record<number, RegionConfig> = {
   3: {
     width: 400,
     height: 360,

@@ -1,13 +1,13 @@
-import { getRegions } from "./svg-regions.js";
-import { parseExpression } from "./utils.js";
-import { CONFIG } from "./config.js";
+import { getRegions } from "@core/svg-regions";
+import { parseExpression } from "@utils/parseExpression";
+import { CONFIG } from "@app/config";
 
 export function generateSVG(
-  exprInput,
-  width,
-  height,
-  errorDiv = undefined,
-  isLarge = false,
+  exprInput: string,
+  width: number,
+  height: number,
+  errorDiv?: HTMLDivElement,
+  isLarge: boolean = false,
   mode = 3,
 ) {
   let svgHtml = `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">`;
@@ -25,7 +25,7 @@ export function generateSVG(
     if (errorDiv) errorDiv.innerText = "שגיאה בביטוי המתמטי.";
     else alert("שגיאה בביטוי המתמטי.");
     console.error(err);
-    return;
+    return "";
   }
   svgHtml += `</g>`;
 
@@ -35,12 +35,13 @@ export function generateSVG(
   return svgHtml;
 }
 
-function placeObjectsInSVG(svgHtml, mode, m = 1) {
+function placeObjectsInSVG(svgHtml: string, mode: number, m: number = 1) {
   const cfg = CONFIG[mode];
+  if (!cfg) return "";
 
   let outlines = "";
   if (mode === 3) {
-    outlines = `<circle cx="${cfg.cA.cx * m}" cy="${cfg.cA.cy * m}" r="${cfg.cA.r * m}" /><circle cx="${cfg.cB.cx * m}" cy="${cfg.cB.cy * m}" r="${cfg.cB.r * m}" /><circle cx="${cfg.cC.cx * m}" cy="${cfg.cC.cy * m}" r="${cfg.cC.r * m}" />`;
+    outlines = `<circle cx="${cfg.cA.cx * m}" cy="${cfg.cA.cy * m}" r="${cfg.cA.r * m}" /><circle cx="${cfg.cB.cx * m}" cy="${cfg.cB.cy * m}" r="${cfg.cB.r * m}" /><circle cx="${(cfg.cC?.cx || 1) * m}" cy="${(cfg.cC?.cy || 1) * m}" r="${(cfg.cC?.r || 1) * m}" />`;
   } else {
     outlines = `<circle cx="${cfg.cA.cx * m}" cy="${cfg.cA.cy * m}" r="${cfg.cA.r * m}" /><circle cx="${cfg.cB.cx * m}" cy="${cfg.cB.cy * m}" r="${cfg.cB.r * m}" />`;
   }
@@ -53,7 +54,7 @@ function placeObjectsInSVG(svgHtml, mode, m = 1) {
       ? [
           { text: "A", x: cfg.cA.cx - paddingLR, y: cfg.cA.cy },
           { text: "B", x: cfg.cB.cx + paddingLR, y: cfg.cB.cy },
-          { text: "C", x: cfg.cC.cx, y: cfg.cC.cy + 120 },
+          { text: "C", x: cfg.cC?.cx, y: (cfg.cC?.cy || 0) + 120 },
         ]
       : [
           { text: "A", x: cfg.cA.cx - paddingLR, y: cfg.cA.cy },
@@ -61,7 +62,7 @@ function placeObjectsInSVG(svgHtml, mode, m = 1) {
         ];
 
   labels.forEach((label) => {
-    svgHtml += `<text x="${label.x * m}" y="${label.y * m}" font-size="${fontSize}" font-weight="bold" font-family="system-ui" text-anchor="middle">${label.text}</text>`;
+    svgHtml += `<text x="${(label.x || 1) * m}" y="${(label.y || 1) * m}" font-size="${fontSize}" font-weight="bold" font-family="system-ui" text-anchor="middle">${label.text}</text>`;
   });
 
   return svgHtml;

@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "module": "ESNext",
+    "lib": ["ESNext", "DOM"],
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx" /* תוריד אם אתה לא משתמש ב-React */,
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+
+    "paths": {
+      "@app/*": ["./app/*"],
+      "@core/*": ["./app/core/*"],
+      "@utils/*": ["./app/utils/*"]
+    }
+  },
+  "include": ["app"]
+}
