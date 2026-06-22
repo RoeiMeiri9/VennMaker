@@ -9,9 +9,9 @@ export default defineConfig({
   plugins: [checker({ typescript: true }), svelte()],
   resolve: {
     alias: {
-      "@app": path.resolve(__dirname, "./app"),
-      "@core": path.resolve(__dirname, "./app/core"),
-      "@utils": path.resolve(__dirname, "./app/utils"),
+      "@src": path.resolve(__dirname, "./src"),
+      "@core": path.resolve(__dirname, "./src/core"),
+      "@utils": path.resolve(__dirname, "./src/utils"),
     },
   },
 });

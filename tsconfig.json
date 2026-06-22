@@ -21,13 +21,13 @@
     "noUncheckedIndexedAccess": true,
 
     "paths": {
-      "@app/*": ["./app/*"],
-      "@core/*": ["./app/core/*"],
-      "@utils/*": ["./app/utils/*"]
+      "@src/*": ["./src/*"],
+      "@core/*": ["./src/core/*"],
+      "@utils/*": ["./src/utils/*"]
     },
 
     // Allows being compiled for vite and svelte
     "types": ["vite/client", "svelte"]
   },
-  "include": ["app", "**/*.svelte"]
+  "include": ["src", "**/*.svelte"]
 }

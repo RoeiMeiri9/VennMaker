@@ -1,6 +1,6 @@
 import { getRegions } from "@core/svg-regions";
 import { parseExpression } from "@utils/parseExpression";
-import { CONFIG } from "@app/config";
+import { CONFIG } from "@src/config";
 
 export function generateSVG(
   exprInput: string,
