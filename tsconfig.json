@@ -12,7 +12,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx" /* תוריד אם אתה לא משתמש ב-React */,
 
     /* Linting */
     "strict": true,
@@ -25,7 +24,10 @@
       "@app/*": ["./app/*"],
       "@core/*": ["./app/core/*"],
       "@utils/*": ["./app/utils/*"]
-    }
+    },
+
+    // Allows being compiled for vite and svelte
+    "types": ["vite/client", "svelte"]
   },
-  "include": ["app"]
+  "include": ["app", "**/*.svelte"]
 }

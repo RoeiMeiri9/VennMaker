@@ -6,7 +6,7 @@ import path from "path";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-  plugins: [checker({ typescript: true })],
+  plugins: [checker({ typescript: true }), svelte()],
   resolve: {
     alias: {
       "@app": path.resolve(__dirname, "./app"),
