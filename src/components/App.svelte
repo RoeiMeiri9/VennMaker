@@ -2,9 +2,9 @@
   import { renderMathSymbols, setMode } from "@src/ui";
   import { correctExpression } from "@src/utils/parseExpression";
   import { onMount } from "svelte";
-  import MathSym from "./MathSym.svelte";
-  import { state } from "@src/core/states.svelte";
-  import VennDiagramCanvas from "./VennDiagram/VennDiagramCanvas.svelte";
+  import MathSym from "@components/MathSym.svelte";
+  import { state } from "@src/states.svelte";
+  import VennDiagramCanvas from "@components/VennDiagram/VennDiagramCanvas.svelte";
 
   onMount(() => {
     renderMathSymbols();
@@ -49,13 +49,7 @@
     <div id="error-msg" class="error"> </div>
   </div>
 
-  <div id="svg-container">
-    <VennDiagramCanvas />
-  </div>
-
-  <button on:click={() => console.log("I will support this feature soon!")}>
-    העתק SVG
-  </button>
+  <VennDiagramCanvas />
 
   <div class="legend">
     <div class="legend-title">מדריך סימנים מהיר</div>

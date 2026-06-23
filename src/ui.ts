@@ -1,4 +1,4 @@
-import { state } from "@src/core/states.svelte";
+import { state } from "@src/states.svelte";
 
 import katex from "katex";
 import "katex/dist/katex.min.css";

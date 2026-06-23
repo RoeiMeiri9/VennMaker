@@ -1,10 +1,10 @@
 <script lang="ts">
   import { getActiveRegions } from "@src/core/svg-regions";
-  import { state } from "@src/core/states.svelte";
+  import { state } from "@src/states.svelte";
   import { CONFIG } from "@src/config";
 
-  import { onMount } from "svelte";
   import paper from "paper";
+  import { onMount } from "svelte";
   import { Color } from "paper/dist/paper-core";
   import type { Region } from "./types";
 
@@ -135,6 +135,25 @@
       });
     });
   }
+
+  async function copyCanvasToClipboard() {
+    try {
+      const blob = await new Promise<Blob | null>((resolve) =>
+        canvas.toBlob(resolve),
+      );
+      if (blob) {
+        await navigator.clipboard.write([
+          new ClipboardItem({ [blob.type]: blob }),
+        ]);
+        alert("התמונה הועתקה ללוח!");
+      }
+    } catch (err) {
+      console.error("נכשל בהעתקה:", err);
+    }
+  }
 </script>
 
-<canvas {width} {height} bind:this={canvas}></canvas>
+<div id="svg-container">
+  <canvas {width} {height} bind:this={canvas}></canvas>
+</div>
+<button onclick={() => copyCanvasToClipboard()}> העתק SVG </button>

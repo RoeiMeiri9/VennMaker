@@ -1,5 +1,5 @@
 import { safeEvaluate } from "@core/logic-parser";
-import { state } from "@src/core/states.svelte";
+import { state } from "@src/states.svelte";
 import { translateHebrewInput } from "./hebrewToEnglish";
 
 export function parseExpression(expr: string, maskValue: number) {
