@@ -7,7 +7,7 @@ export function getActiveRegions(expression: string, mode: number): Region[] {
   try {
     for (let i = 1; i < 2 ** mode; i++) {
       activeRegions.push({
-        signature: i.toString(2).padStart(3, "0"),
+        signature: i.toString(2).padStart(mode, "0"),
         visible: parseExpression(expression, i),
       });
     }

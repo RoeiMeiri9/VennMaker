@@ -12,9 +12,6 @@
   let height = $derived(CONFIG[state.mode].height);
 
   let activeRegions = $derived(getActiveRegions(state.expression, state.mode));
-  $effect(() => {
-    render(activeRegions);
-  });
   let canvas: HTMLCanvasElement;
 
   onMount(() => {
@@ -25,6 +22,18 @@
       paper.project.clear();
     };
   });
+
+  $effect(() => {
+    if (!paper.project) return;
+    render(activeRegions);
+  });
+
+  $effect(() => {
+    paper.view.viewSize = new paper.Size(width, height);
+    paper.view.update();
+    render(activeRegions);
+  });
+
   let circles: paper.Path.Circle[] = [];
 
   function getRegion(signature: string): paper.PathItem | null {
