@@ -4,7 +4,7 @@
   import { onMount } from "svelte";
   import MathSym from "./MathSym.svelte";
   import { state } from "@src/core/states.svelte";
-  import Canvas from "./VennDiagram/Canvas.svelte";
+  import VennDiagramCanvas from "./VennDiagram/VennDiagramCanvas.svelte";
 
   onMount(() => {
     renderMathSymbols();
@@ -50,7 +50,7 @@
   </div>
 
   <div id="svg-container">
-    <Canvas />
+    <VennDiagramCanvas />
   </div>
 
   <button on:click={() => console.log("I will support this feature soon!")}>

@@ -1,6 +1,6 @@
 export const state: { expression: string; mode: 2 | 3; error: string } = $state(
   {
-    expression: "(A U B) - C",
+    expression: "(C - B)",
     mode: 3,
     error: "",
   },
