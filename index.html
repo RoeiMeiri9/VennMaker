@@ -7,74 +7,8 @@
     <link rel="stylesheet" href="src/style.css" />
   </head>
   <body>
-    <div class="container">
-      <h1>מחולל דיאגרמות וון וקטורי</h1>
-      <p class="subtitle">הזן ביטוי מתמטי לקבלת צביעה מדויקת של אזורי חפיפה</p>
+    <div id="app"></div>
 
-      <div class="controls">
-        <div class="row">
-          <button id="btn2" class="toggle-btn" onclick="setCircles(2)"
-            >2 עיגולים</button
-          >
-          <button id="btn3" class="toggle-btn active" onclick="setCircles(3)"
-            >3 עיגולים</button
-          >
-        </div>
-
-        <div class="row">
-          <input
-            type="text"
-            id="expression"
-            value="(A U B) - C"
-            placeholder="לדוגמה: (A U B) - C"
-            onkeypress="renderDiagram()"
-            lang="en"
-            autocapitalize="none"
-            autocorrect="off"
-          />
-        </div>
-        <div id="error-msg" class="error"> </div>
-      </div>
-
-      <div id="svg-container"> </div>
-
-      <button onclick="copySVGAsImage()">העתק SVG</button>
-
-      <div class="legend">
-        <div class="legend-title">מדריך סימנים מהיר</div>
-
-        <div class="legend-grid">
-          <div class="legend-item">
-            <span class="key">U</span> איחוד
-            <span class="math-sym">(A \cup B)</span>
-          </div>
-          <div class="legend-item">
-            <span class="key">n</span> חיתוך
-            <span class="math-sym">(A \cap B)</span>
-          </div>
-          <div class="legend-item">
-            <span class="key">-</span> הפרש / חיסור
-            <span class="math-sym">(A \setminus B)</span>
-          </div>
-          <div class="legend-item">
-            <span class="key">^</span> הפרש סימטרי
-            <span class="math-sym">(A \oplus B)</span>
-          </div>
-          <div class="legend-item">
-            <span class="key">!</span> משלים
-            <span class="math-sym">(\overline{A})</span>
-          </div>
-        </div>
-
-        <div class="legend-examples">
-          <strong>דוגמאות לשימוש:</strong>
-          <code class="ex">A - B</code>
-          <code class="ex">A - (B n C)</code>
-          <code class="ex">(A U B) - C</code>
-        </div>
-      </div>
-    </div>
-
-    <script type="module" src="src/main.ts"></script>
+    <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

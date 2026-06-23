@@ -1,12 +1,18 @@
+export type Circle = {
+  cx: number;
+  cy: number;
+  r: number;
+};
+
 export interface RegionConfig {
   width: number;
   height: number;
-  cA: { cx: number; cy: number; r: number };
-  cB: { cx: number; cy: number; r: number };
-  cC?: { cx: number; cy: number; r: number };
+  cA: Circle;
+  cB: Circle;
+  cC?: Circle;
 }
 
-export const CONFIG: Record<number, RegionConfig> = {
+export const CONFIG: Record<2 | 3, RegionConfig> = {
   3: {
     width: 400,
     height: 360,

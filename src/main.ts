@@ -1,9 +1,8 @@
-import { initUI, renderMathSymbols } from "@src/ui";
-import { renderDiagram } from "@core/render-service";
-import "katex/dist/katex.min.css";
+import App from "@components/App.svelte";
+import { mount } from "svelte";
 
-document.addEventListener("DOMContentLoaded", () => {
-  initUI();
-  renderDiagram();
-  renderMathSymbols();
+const app = mount(App, {
+  target: document.getElementById("app")!,
 });
+
+export default app;
