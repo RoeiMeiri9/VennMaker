@@ -1,14 +1,16 @@
 <script lang="ts">
-  import { renderMathSymbols, setMode } from "@src/ui";
   import { correctExpression } from "@src/utils/parseExpression";
-  import { onMount } from "svelte";
   import MathSym from "@components/MathSym.svelte";
   import { state } from "@src/states.svelte";
   import VennDiagramCanvas from "@components/VennDiagram/VennDiagramCanvas.svelte";
 
-  onMount(() => {
-    renderMathSymbols();
-  });
+  function setMode(num: 2 | 3) {
+    state.mode = num;
+
+    if (num === 2 && state.expression.includes("C")) {
+      state.expression = "A - B";
+    }
+  }
 </script>
 
 <div class="container">
