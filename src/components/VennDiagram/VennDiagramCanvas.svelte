@@ -90,6 +90,50 @@
         getRegion(ar.signature);
       }
     }
+    placeLabels();
+  }
+
+  function placeLabels() {
+    const circlesData = CONFIG[state.mode].circles;
+    const PADDING = 30;
+    const fixX = 6;
+    const fixY = 8;
+
+    circlesData.forEach((c, index) => {
+      const r = c.r + PADDING;
+      const candidates = [
+        { x: c.cx - (r - fixX), y: c.cy + fixY, label: "Left" },
+        { x: c.cx + (r - fixX), y: c.cy + fixY, label: "Right" },
+        { x: c.cx, y: c.cy - r, label: "Top" },
+        { x: c.cx, y: c.cy + r, label: "Bottom" },
+      ];
+
+      let chosenPos = candidates[0];
+
+      for (const pos of candidates) {
+        const isColliding = circlesData.some((other, i) => {
+          if (i === index) return false;
+          const dist = Math.sqrt(
+            (pos.x - other.cx) ** 2 + (pos.y - other.cy) ** 2,
+          );
+          return dist < other.r + PADDING;
+        });
+
+        if (!isColliding) {
+          chosenPos = pos;
+          break;
+        }
+      }
+
+      new paper.PointText({
+        point: [chosenPos?.x, chosenPos?.y],
+        content: String.fromCharCode(65 + index),
+        fillColor: "#222",
+        fontFamily: "Arial",
+        fontSize: 22,
+        justification: "center",
+      });
+    });
   }
 </script>
 
