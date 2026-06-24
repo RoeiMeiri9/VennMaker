@@ -10,7 +10,7 @@
     $props();
 </script>
 
-<button {id} class="toggle-btn" class:active onclick={onClick()}>
+<button {id} class="toggle-btn" class:active onclick={() => onClick()}>
   {@render children()}
 </button>
 
