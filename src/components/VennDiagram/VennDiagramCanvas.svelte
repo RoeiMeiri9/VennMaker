@@ -130,6 +130,7 @@
         content: String.fromCharCode(65 + index),
         fillColor: "#222",
         fontFamily: "Arial",
+        fontWeight: "bold",
         fontSize: 22,
         justification: "center",
       });
