@@ -1,31 +1,26 @@
 <script lang="ts">
   import MathSym from "@components/MathSym.svelte";
+
+  const symbols = [
+    { key: "U", label: "איחוד", formula: "(A \\cup B)" },
+    { key: "n", label: "חיתוך", formula: "(A \\cap B)" },
+    { key: "-", label: "הפרש", formula: "(A \\setminus B)" },
+    { key: "^", label: "הפרש סימטרי", formula: "(A \\oplus B)" },
+    { key: "!", label: "משלים", formula: "(\\overline{A})" },
+  ];
 </script>
 
 <div class="legend">
   <div class="legend-title">מדריך סימנים מהיר</div>
 
   <div class="legend-grid">
-    <div class="legend-item">
-      <span class="key">U</span> איחוד
-      <MathSym formula="(A \cup B)" />
-    </div>
-    <div class="legend-item">
-      <span class="key">n</span> חיתוך
-      <MathSym formula="(A \cap B)" />
-    </div>
-    <div class="legend-item">
-      <span class="key">-</span> הפרש / חיסור
-      <MathSym formula="(A \setminus B)" />
-    </div>
-    <div class="legend-item">
-      <span class="key">^</span> הפרש סימטרי
-      <MathSym formula="(A \oplus B)" />
-    </div>
-    <div class="legend-item">
-      <span class="key">!</span> משלים
-      <MathSym formula={"(\\overline{A})"} />
-    </div>
+    {#each symbols as item}
+      <div class="legend-item">
+        <span class="key">{item.key}</span>
+        {item.label}
+        <MathSym formula={item.formula} />
+      </div>
+    {/each}
   </div>
 
   <div class="legend-examples">
