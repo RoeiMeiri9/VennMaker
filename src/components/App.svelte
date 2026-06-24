@@ -1,5 +1,5 @@
 <script lang="ts">
-  import venn-diagramCanvas from "@components/venn-diagram/venn-diagramCanvas.svelte";
+  import VennDiagramCanvas from "@components/venn-diagram/venn-diagramCanvas.svelte";
   import Legend from "@components/Legend.svelte";
   import Controls from "@components/controls/Controls.svelte";
 </script>
@@ -8,7 +8,7 @@
   <h1>מחולל דיאגרמות וון וקטורי</h1>
   <p class="subtitle">הזן ביטוי מתמטי לקבלת צביעה מדויקת של אזורי חפיפה</p>
   <Controls />
-  <venn-diagramCanvas />
+  <VennDiagramCanvas />
   <Legend />
 </div>
 
