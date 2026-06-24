@@ -1,4 +1,6 @@
 import { safeEvaluate } from "@core/logic-parser";
+import { state } from "@src/states.svelte";
+import { translateHebrewInput } from "./hebrewToEnglish";
 
 export function parseExpression(expr: string, maskValue: number) {
   const clean = expr
@@ -21,5 +23,14 @@ export function parseExpression(expr: string, maskValue: number) {
   } catch (e) {
     console.error(e);
     return false;
+  }
+}
+
+export function correctExpression() {
+  const { expression } = state;
+  const correctedValue = translateHebrewInput(expression);
+
+  if (expression !== correctedValue) {
+    state.expression = correctedValue;
   }
 }
