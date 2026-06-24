@@ -17,3 +17,10 @@
 </script>
 
 <span class="math-sym" bind:this={element}></span>
+
+<style>
+  .math-sym {
+    color: var(--text-tertiary);
+    font-size: 0.85rem;
+  }
+</style>

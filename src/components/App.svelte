@@ -1,7 +1,7 @@
 <script lang="ts">
   import VennDiagramCanvas from "@components/VennDiagram/VennDiagramCanvas.svelte";
   import Legend from "@components/Legend.svelte";
-  import Controls from "@components/Controls.svelte";
+  import Controls from "@src/components/Controls/Controls.svelte";
 </script>
 
 <div class="container">
@@ -11,3 +11,15 @@
   <VennDiagramCanvas />
   <Legend />
 </div>
+
+<style>
+  .container {
+    width: 100%;
+    max-width: 600px;
+    padding: 25px;
+    background: var(--bg-surface);
+    box-shadow: var(--shadow-sm);
+    border-radius: var(--radius-lg);
+    text-align: center;
+  }
+</style>

@@ -1,170 +1,100 @@
+:root {
+  /* Colors - Brand & Actions */
+  --color-primary: #007aff;
+  --color-primary-hover: #0056b3;
+  --color-success: #34c759;
+  --color-success-hover: #27b14a;
+  --color-error: #ff3b30;
+  --color-white: #ffffff;
+
+  /* Colors - Backgrounds */
+  --bg-body: #f4f4f7;
+  --bg-surface: #ffffff;
+  --bg-light: #f8f9fa;
+  --bg-muted: #e5e5ea;
+  --bg-muted-hover: #d0d0d7;
+  --bg-close: #f0f0f5;
+
+  /* Colors - Text */
+  --text-main: #333333;
+  --text-dark: #1a1a1a;
+  --text-secondary: #48484a;
+  --text-muted: #666666;
+  --text-tertiary: #8e8e93;
+  --text-key: #1c1c1e;
+  --text-examples: #636366;
+
+  /* Colors - Borders */
+  --border-light: #dddddd;
+  --border-medium: #cccccc;
+  --border-ex: #d1d1d6;
+
+  /* Typography */
+  --font-base: system-ui, -apple-system, sans-serif;
+  --font-mono: monospace;
+
+  /* Border Radius */
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-round: 100px;
+
+  /* Shadows & Overlays */
+  --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.25);
+  --overlay-bg: rgba(0, 0, 0, 0.4);
+}
+
 body {
   margin: 0;
   padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #f4f4f7;
-  color: #333;
-  font-family:
-    system-ui,
-    -apple-system,
-    sans-serif;
+  background-color: var(--bg-body);
+  color: var(--text-main);
+  font-family: var(--font-base);
 }
-.container {
-  width: 100%;
-  max-width: 600px;
-  padding: 25px;
-  background: white;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  border-radius: 16px;
-  text-align: center;
-}
+
 h1 {
   margin-bottom: 5px;
-  color: #1a1a1a;
+  color: var(--text-dark);
 }
+
 p.subtitle {
   margin-top: 0;
-  color: #666;
+  color: var(--text-muted);
   font-size: 0.9rem;
 }
-.controls {
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
+
 .row {
   display: flex;
   gap: 10px;
   justify-content: center;
 }
-input[type="text"] {
-  padding: 12px;
-  direction: ltr;
-  flex: 1;
-  border: 2px solid #ddd;
-  border-radius: 8px;
-  font-size: 1.1rem;
-  text-align: left;
-}
-input[type="text"]:focus {
-  border-color: #007aff;
-  outline: none;
-}
+
 button {
   padding: 12px 24px;
-  background-color: #007aff;
+  background-color: var(--color-primary);
   border: none;
-  border-radius: 8px;
-  color: white;
+  border-radius: var(--radius-sm);
+  color: var(--color-white);
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
 }
+
 button:hover {
-  background-color: #0056b3;
+  background-color: var(--color-primary-hover);
 }
-.toggle-btn {
-  background-color: #e5e5ea;
-  color: #333;
-}
-.toggle-btn:hover {
-  background-color: #d0d0d7;
-}
-.toggle-btn.active {
-  background-color: #34c759;
-  color: white;
-}
-.toggle-btn.active:hover {
-  background-color: #27b14a;
-}
-#svg-container {
-  margin-top: 30px;
-  margin-bottom: 10px;
-  padding: 10px;
-  display: flex;
-  justify-content: center;
-  background: #fff;
-  border: 1px dashed #ccc;
-  border-radius: 12px;
-}
+
 .error {
   min-height: 20px;
   margin-top: 10px;
-  color: #ff3b30;
+  color: var(--color-error);
   font-weight: bold;
-}
-
-.legend {
-  margin-top: 24px;
-  padding: 16px;
-  direction: rtl;
-  background-color: #f8f9fa;
-  border: 1px solid #e5e5ea;
-  border-radius: 12px;
-  font-family:
-    system-ui,
-    -apple-system,
-    sans-serif;
-  text-align: right;
-}
-
-.legend-title {
-  margin-bottom: 12px;
-  color: #1a1a1a;
-  font-size: 0.95rem;
-  font-weight: 700;
-}
-
-.legend-grid {
-  margin-bottom: 14px;
-  padding-bottom: 12px;
-  display: grid;
-  gap: 12px;
-  border-bottom: 1px dashed #e5e5ea;
-}
-
-.legend-item {
-  display: flex;
-  gap: 6px;
-  align-items: center;
-  color: #48484a;
-  font-size: 0.9rem;
-}
-
-.legend .key {
-  padding: 2px 8px;
-  background: #e5e5ea;
-  border-radius: 6px;
-  color: #1c1c1e;
-  font-size: 0.95rem;
-  font-family: monospace;
-  font-weight: bold;
-}
-
-.legend .math-sym {
-  color: #8e8e93;
-  font-size: 0.85rem;
-}
-
-.legend-examples {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
-  color: #636366;
-  font-size: 0.85rem;
-}
-
-.legend .ex {
-  padding: 3px 8px;
-  direction: ltr;
-  background: #ffffff;
-  border: 1px solid #d1d1d6;
-  border-radius: 6px;
-  font-family: monospace;
 }
 
 #venn-overlay {
@@ -178,11 +108,8 @@ button:hover {
   align-items: center;
   justify-content: center;
   opacity: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-  font-family:
-    system-ui,
-    -apple-system,
-    sans-serif;
+  background-color: var(--overlay-bg);
+  font-family: var(--font-base);
   transition: opacity 0.3s ease;
   z-index: 9999;
   backdrop-filter: blur(8px);
@@ -195,9 +122,9 @@ button:hover {
   padding: 24px;
   transform: scale(0.9);
   position: relative;
-  background: white;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
-  border-radius: 20px;
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-lg);
+  border-radius: var(--radius-xl);
   text-align: center;
   transition: transform 0.3s ease;
 }
@@ -209,26 +136,27 @@ button:hover {
   height: 40px;
   padding: 0;
   position: absolute;
-  background: #f0f0f5;
+  background: var(--bg-close);
   border: none;
-  border-radius: 100px;
-  color: #666;
+  border-radius: var(--radius-round);
+  color: var(--text-muted);
   font-size: 14px;
   cursor: pointer;
 }
+
 .venn-modal-close:hover {
-  background-color: #d0d0d7;
+  background-color: var(--bg-muted-hover);
 }
 
 .venn-modal-title {
   margin: 0 0 8px 0;
-  color: #1a1a1a;
+  color: var(--text-dark);
   font-size: 1.2rem;
 }
 
 .venn-modal-subtitle {
   margin: 0 0 20px 0;
-  color: #666;
+  color: var(--text-muted);
   font-size: 0.95rem;
   line-height: 1.4;
 }
@@ -236,8 +164,8 @@ button:hover {
 .venn-modal-img {
   height: auto;
   max-width: 100%;
-  background: #fff;
-  border: 1px solid #e5e5ea;
-  border-radius: 12px;
+  background: var(--bg-surface);
+  border: 1px solid var(--bg-muted);
+  border-radius: var(--radius-md);
   -webkit-touch-callout: default;
 }

@@ -158,3 +158,16 @@
   <canvas {width} {height} bind:this={canvas}></canvas>
 </div>
 <button onclick={() => copyCanvasToClipboard()}> העתק SVG </button>
+
+<style>
+  #svg-container {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    background: var(--bg-surface);
+    border: 1px dashed var(--border-medium);
+    border-radius: var(--radius-md);
+  }
+</style>
