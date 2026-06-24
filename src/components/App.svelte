@@ -1,7 +1,7 @@
 <script lang="ts">
-  import VennDiagramCanvas from "@components/VennDiagram/VennDiagramCanvas.svelte";
+  import VennDiagramCanvas from "@components/vennDiagram/VennDiagramCanvas.svelte";
   import Legend from "@components/Legend.svelte";
-  import Controls from "@src/components/Controls/Controls.svelte";
+  import Controls from "@components/controls/Controls.svelte";
 </script>
 
 <div class="container">
