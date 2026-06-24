@@ -1,6 +1,6 @@
 import { parseExpression } from "@src/utils/parseExpression";
 import { state } from "../states.svelte";
-import { Region } from "@src/components/vennDiagram/types";
+import type { Region } from "@components/vennDiagram/types";
 
 export function getActiveRegions(expression: string, mode: number): Region[] {
   const activeRegions: Region[] = [];
