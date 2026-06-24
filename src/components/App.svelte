@@ -1,5 +1,5 @@
 <script lang="ts">
-  import VennDiagramCanvas from "@components/venn-diagram/venn-diagramCanvas.svelte";
+  import VennDiagramCanvas from "@components/venn-diagram/VennDiagramCanvas.svelte";
   import Legend from "@components/Legend.svelte";
   import Controls from "@components/controls/Controls.svelte";
 </script>
