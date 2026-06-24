@@ -7,10 +7,7 @@
 <div class="container">
   <h1>מחולל דיאגרמות וון וקטורי</h1>
   <p class="subtitle">הזן ביטוי מתמטי לקבלת צביעה מדויקת של אזורי חפיפה</p>
-
   <Controls />
-
   <VennDiagramCanvas />
-
   <Legend />
 </div>

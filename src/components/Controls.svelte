@@ -1,14 +1,6 @@
 <script lang="ts">
+  import { setMode, state } from "@src/states.svelte";
   import { correctExpression } from "@src/utils/parseExpression";
-  import { state } from "@src/states.svelte";
-
-  function setMode(num: 2 | 3) {
-    state.mode = num;
-
-    if (num === 2 && state.expression.includes("C")) {
-      state.expression = "A - B";
-    }
-  }
 </script>
 
 <div class="controls">
